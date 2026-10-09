@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Generador de Demos</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f14;--pan:#151821;--pan2:#1c2030;--line:#262b3b;--txt:#e8eaf0;--mut:#8b91a5;--acc:#ff5a36;--ok:#22c55e}
+*{box-sizing:border-box;margin:0}body{background:var(--bg);color:var(--txt);font:15px/1.5 Inter,system-ui,sans-serif}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(13,15,20,.9);backdrop-filter:blur(10px);z-index:10}
+.top h1{font-size:1.05rem;font-weight:800;letter-spacing:-.01em}.top h1 span{color:var(--acc)}
+.badge{font-size:.75rem;padding:4px 10px;border-radius:999px;background:var(--pan2);color:var(--mut)}.badge.on{background:rgba(34,197,94,.15);color:var(--ok)}
+.layout{display:grid;grid-template-columns:1fr 340px;gap:24px;max-width:1300px;margin:0 auto;padding:24px}
+@media(max-width:1000px){.layout{grid-template-columns:1fr}}
+.card{background:var(--pan);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}
+.card h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+label{display:block;font-size:.8rem;color:var(--mut);margin-bottom:5px;font-weight:500}
+input,textarea,select{width:100%;background:var(--pan2);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:10px 12px;font:inherit}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
+textarea{resize:vertical;min-height:72px}
+.colors{display:flex;gap:10px;align-items:center}.colors input[type=color]{width:52px;height:42px;padding:3px;cursor:pointer}
+.drop{border:2px dashed var(--line);border-radius:14px;padding:26px;text-align:center;color:var(--mut);cursor:pointer;transition:.2s}
+.drop.over,.drop:hover{border-color:var(--acc);color:var(--txt);background:rgba(255,214,10,.05)}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:14px}
+.th{position:relative;border-radius:10px;overflow:hidden;background:var(--pan2)}.th img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.th select{border-radius:0;border:0;padding:6px;font-size:.78rem}.th .x{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.7);color:#fff;border:0;border-radius:50%;width:24px;height:24px;cursor:pointer}
+.count{font-size:.8rem}.count.low{color:#f59e0b}.count.good{color:var(--ok)}
+.mrow{display:grid;grid-template-columns:56px 1fr 1fr 110px 130px 32px;gap:8px;align-items:center;margin-bottom:8px}
+.mrow .ph{width:56px;height:56px;border-radius:10px;background:var(--pan2) center/cover;border:1px dashed var(--line);cursor:pointer;display:grid;place-items:center;color:var(--mut);font-size:1.3rem}
+.mrow .desc{grid-column:2/-2}
+.mrow button{background:none;border:0;color:var(--mut);font-size:1.2rem;cursor:pointer}
+@media(max-width:700px){.mrow{grid-template-columns:56px 1fr 1fr 32px}.mrow .pr,.mrow .ct{grid-column:2/-2}}
+.btn{background:var(--pan2);border:1px solid var(--line);color:var(--txt);padding:9px 14px;border-radius:10px;cursor:pointer;font:600 .85rem Inter}.btn:hover{border-color:var(--acc)}
+.tpls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tpl{border:2px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;text-align:center;font-weight:600;font-size:.85rem;transition:.2s}
+.tpl .sw{height:52px;border-radius:8px;margin-bottom:8px}.tpl.on{border-color:var(--acc);background:rgba(255,214,10,.07)}
+.tpl small{display:block;color:var(--mut);font-weight:400;font-size:.72rem}
+@media(max-width:640px){.tpls{grid-template-columns:1fr 1fr}}
+.go{width:100%;background:var(--acc);color:#fff;border:0;padding:16px;border-radius:12px;font:800 1.05rem Inter;cursor:pointer;box-shadow:0 10px 30px rgba(255,214,10,.3);transition:.2s}.go:hover{transform:translateY(-2px)}.go:disabled{opacity:.6;cursor:wait;transform:none}
+.side{position:sticky;top:80px;align-self:start}
+.demo{display:flex;gap:10px;align-items:center;padding:8px;border-radius:12px;text-decoration:none;color:inherit;transition:.15s}.demo:hover{background:var(--pan2)}
+.demo img{width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--pan2)}.demo b{display:block;font-size:.9rem}.demo small{color:var(--mut);font-size:.75rem}
+.prog{display:none;margin-top:14px;font-size:.88rem;color:var(--mut)}.prog.on{display:block}
+.bar{height:6px;border-radius:9px;background:var(--pan2);overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),#ffb347);transition:width .4s}
+.sw{display:inline-flex;gap:4px}.sw i{width:18px;height:18px;border-radius:5px;border:1px solid #fff3}
+.ai-opt{display:flex;gap:10px;align-items:flex-start;background:linear-gradient(135deg,rgba(255,214,10,.12),rgba(255,179,71,.08));border:1px solid rgba(255,214,10,.35);border-radius:12px;padding:14px;margin-top:14px;cursor:pointer}.ai-opt input{width:auto;margin-top:3px}.ai-opt.off{opacity:.55;cursor:not-allowed}
+.feats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.feat{display:flex;gap:10px;align-items:flex-start;background:var(--pan2);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;margin:0;color:var(--txt)}.feat input{width:auto;margin-top:3px}.feat b{display:block;font-size:.88rem}.feat small{color:var(--mut);font-size:.75rem}
+@media(max-width:700px){.feats{grid-template-columns:1fr}}
+.demo{position:relative}.demo .del{position:absolute;right:6px;top:50%;margin-top:-13px;width:26px;height:26px;border-radius:50%;border:0;background:transparent;color:var(--mut);cursor:pointer;font-size:1rem;opacity:0}.demo:hover .del{opacity:1}.demo .del:hover{background:#3a1f22;color:#ff6b6b}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.chips button{background:var(--pan2);border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:5px 10px;font:500 .76rem Inter;cursor:pointer}.chips button:hover{color:var(--txt);border-color:var(--acc)}
+.hint{font-size:.78rem;color:var(--mut);margin-top:6px}
+
+/* ── Tema DemoChef: amarillo chillón + grafito ── */
+:root{--bg:#18191c;--pan:#212327;--pan2:#2b2e33;--line:#383c43;--txt:#f5f5f2;--mut:#a0a4ab;--acc:#ffd60a;--acc-d:#c9a800;--ink:#111214;--ok:#22c55e}
+body{background:radial-gradient(#ffffff0b 1px,transparent 1px) 0 0/22px 22px,var(--bg)}
+input[type=checkbox]{accent-color:var(--acc)}
+.top{background:var(--acc);color:var(--ink);border:0;padding:12px 24px;box-shadow:0 4px 0 var(--ink)}
+.top h1{display:flex;align-items:center;gap:12px;font:900 1.25rem Archivo,Inter,sans-serif;letter-spacing:-.02em}
+.top h1 .mark{background:var(--ink);color:var(--acc);width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:1.25rem;transform:rotate(-6deg)}
+.top h1 small{font:600 .82rem Inter,sans-serif;opacity:.65;letter-spacing:0;padding-left:12px;border-left:2px solid #11121433}
+@media(max-width:640px){.top h1 small{display:none}}
+.badge{background:var(--ink);color:var(--acc)}
+.intro{padding:6px 2px 20px}.intro h2{font:900 clamp(1.8rem,4vw,2.6rem)/1 Archivo,sans-serif;letter-spacing:-.03em}.intro h2:after{content:'';display:block;width:64px;height:6px;background:var(--acc);border-radius:3px;margin-top:12px}
+.intro p{color:var(--mut);margin-top:10px}
+#f{counter-reset:step}
+.card{border-radius:18px;box-shadow:0 1px 0 #ffffff08 inset}
+.card h2{color:var(--txt);font:800 .82rem Archivo,sans-serif;letter-spacing:.1em;justify-content:flex-start;flex-wrap:wrap;gap:8px 0;line-height:1.6}
+.card h2>:last-child{margin-left:auto}
+#f .card>h2:before{counter-increment:step;content:counter(step,decimal-leading-zero);background:var(--acc);color:var(--ink);font-weight:900;border-radius:7px;padding:3px 8px;margin-right:12px;letter-spacing:0}
+.side .card h2{color:var(--acc)}
+.btn{font-family:Inter,sans-serif}.btn:hover{border-color:var(--acc);color:var(--acc)}
+.drop{border-color:#4a4f57}.drop:hover,.drop.over{border-color:var(--acc);color:var(--txt)}
+.tpl{background:var(--pan2);border-color:transparent}.tpl:hover{border-color:#4a4f57}.tpl.on{border-color:var(--acc);background:rgba(255,214,10,.08)}
+.feat:has(input:checked){border-color:var(--acc)}
+.chips button:hover{border-color:var(--acc);color:var(--acc)}
+.go{color:var(--ink);font:900 1.1rem Archivo,sans-serif;text-transform:uppercase;letter-spacing:.04em;border-radius:14px;box-shadow:0 6px 0 var(--acc-d);transition:transform .12s,box-shadow .12s}
+.go:hover{transform:translateY(-2px);box-shadow:0 8px 0 var(--acc-d)}.go:active{transform:translateY(4px);box-shadow:0 2px 0 var(--acc-d)}
+.bar i{background:linear-gradient(90deg,var(--acc),#fff27a)}
+.demo:hover{background:var(--pan2)}.demo:hover b{color:var(--acc)}
+</style></head><body>
+<div class="top"><h1><span class="mark">🍽</span>DemoChef<small>Generador de demos para restaurantes</small></h1><span class="badge" id="aiBadge" hidden></span></div>
+<div class="layout">
+<form id="f" autocomplete="off">
+ <div class="intro"><h2>Nueva demo</h2><p>Llena los datos del restaurante, sube sus fotos y genera la página en minutos.</p></div>
+ <div class="card"><h2>Negocio <button type="button" class="btn" id="sample">Cargar datos de ejemplo</button></h2>
+  <div class="grid">
+   <div><label>Nombre del restaurante *</label><input name="name" required></div>
+   <div><label>Logo</label><input type="file" name="logo" accept="image/*" id="logo"><label id="logoColorsRow" style="display:none;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" id="useLogo" name="logoColors" value="1" checked style="width:auto"> Usar los colores del logo en la página <span class="sw" id="logoSw"></span></label></div>
+   <div><label>Color principal</label><div class="colors"><input type="color" name="color" value="#c0392b" id="c1"><input id="c1t" value="#c0392b"></div><div class="hint" id="logoHint"></div></div>
+   <div><label>Color secundario (opcional)</label><div class="colors"><input type="color" name="color2" value="#f3c27a" id="c2"><label style="display:flex;gap:6px;align-items:center;margin:0"><input type="checkbox" id="useC2" style="width:auto"> usar</label></div></div>
+   <div class="full"><label>Descripción corta del negocio</label><textarea name="description" placeholder="Ej: Soda familiar desde hace 20 años, famosa por sus casados y el gallo pinto de doña Rosa."></textarea></div>
+  </div></div>
+
+ <div class="card"><h2>Contacto y ubicación</h2><div class="grid">
+  <div><label>Teléfono (opcional)</label><input name="phone" inputmode="tel"></div>
+  <div><label>WhatsApp (opcional)</label><input name="whatsapp" inputmode="tel" placeholder="8888-8888"></div>
+  <div class="full"><label>Correo (opcional)</label><input name="email" type="email"></div>
+  <div class="full"><label>Dirección completa</label><input name="address"></div>
+  <div class="full"><label>URL de Google Maps</label><input name="mapsUrl" placeholder="https://maps.app.goo.gl/..."></div>
+ </div></div>
+
+ <div class="card"><h2>Redes sociales</h2><div class="grid">
+  <div><label>Facebook</label><input name="facebook" placeholder="URL o usuario"></div>
+  <div><label>Instagram</label><input name="instagram" placeholder="@usuario"></div>
+  <div><label>TikTok</label><input name="tiktok" placeholder="@usuario"></div>
+  <div><label>Página web existente (opcional)</label><input name="website"></div>
+ </div></div>
+
+ <div class="card"><h2>Fotografías <span class="count" id="pcount">0 fotos · mínimo 5, ideal 10–15</span></h2>
+  <div class="drop" id="drop">Arrastra aquí las fotos (fachada, interior, ambiente, personal, comidas, bebidas, clientes)<br><small>o haz clic para elegir · se eligen solas las 3 mejores comidas y se retocan todas las fotos de comida</small></div>
+  <input type="file" id="pin" accept="image/*" multiple hidden>
+  <div class="thumbs" id="thumbs"></div>
+  <label class="ai-opt" id="aiOpt" hidden><input type="checkbox" id="aiPhotos" name="aiPhotos" value="1" checked><span><b>✨ Rehacer las fotos de comida con IA</b><br><small>Misma comida, pero con luz profesional y un fondo acorde al platillo (tico si es comida típica). Las fotos originales se conservan. Tarda ~1 minuto.</small></span></label>
+ </div>
+
+ <div class="card"><h2>Menú <span><button type="button" class="btn" id="paste">Pegar menú rápido</button> <button type="button" class="btn" id="addm">+ Platillo</button></span></h2>
+  <div id="pasteBox" style="display:none;margin-bottom:14px"><textarea id="pasteTxt" rows="6" placeholder="Una línea por platillo:&#10;Categoría | Nombre | Descripción | Precio&#10;Casados | Casado con pollo | Arroz, frijoles, ensalada y maduro | 3500&#10;o simplemente: Gallo pinto - 2500"></textarea><button type="button" class="btn" id="pasteGo" style="margin-top:8px">Agregar al menú</button></div>
+  <div id="menu"></div><div class="hint">La foto de cada platillo es opcional. Toca el recuadro 📷 para agregarla.</div>
+ </div>
+
+ <div class="card"><h2>Plantilla</h2><div class="tpls" id="tpls">
+  <div class="tpl on" data-t="auto"><div class="sw" style="background:conic-gradient(#6b4426 0 33%,#0b0a09 0 66%,#ff3d2e 0)"></div>Automática<small>según el tipo</small></div>
+  <div class="tpl" data-t="rustic"><div class="sw" style="background:linear-gradient(135deg,#4a2d1a,#f6ecda)"></div>Rustic CR<small>sodas, típica</small></div>
+  <div class="tpl" data-t="premium"><div class="sw" style="background:linear-gradient(135deg,#0b0a09 55%,#c9a45c)"></div>Premium Dining<small>gourmet, parrilla</small></div>
+  <div class="tpl" data-t="urban"><div class="sw" style="background:linear-gradient(135deg,#0e0e0e 50%,#ff3d2e 50% 75%,#ffd400 0)"></div>Urban Food<small>burgers, pizza</small></div>
+ </div><div class="hint">Podrás cambiar de plantilla en vivo frente al cliente.</div></div>
+
+ <div class="card"><h2>Funciones de la demo</h2><div class="feats"><label class="feat"><input type="checkbox" id="fReserve" checked><span><b>📅 Reservaciones</b><small>Formulario de fecha, hora y personas que llega por WhatsApp</small></span></label><label class="feat"><input type="checkbox" id="fSearch" checked><span><b>🔍 Buscador del menú</b><small>Aparece cuando el menú tiene más de 5 platillos</small></span></label></div>
+  <div class="hint">Las reservaciones necesitan número de WhatsApp.</div></div>
+
+ <div class="card"><h2>Instrucciones especiales <small style="text-transform:none;letter-spacing:0">opcional</small></h2>
+  <textarea name="instructions" id="instr" rows="5" placeholder="Pedidos del cliente o tuyos, una instrucción por línea. Ej:&#10;Horario: lunes a sábado de 7am a 8pm&#10;Aviso: ¡Servicio express a domicilio!&#10;Ocultar la galería"></textarea>
+  <div class="chips" id="chips"><button type="button">Horario: lunes a sábado de 7am a 8pm</button><button type="button">Aviso: ¡Servicio express a domicilio!</button><button type="button">Eslogan: El casado más rico de la zona</button><button type="button">Plato del día: Casado con pescado</button><button type="button">Ocultar la galería</button><button type="button">Que se vea más elegante</button><button type="button">Color principal verde</button><button type="button">Sin adornos ticos</button><button type="button">Agregar en nosotros: ...</button><button type="button">El botón que diga Pedí tu casado</button></div>
+  <div class="hint">Toca un ejemplo para agregarlo. Después de generar verás qué se aplicó y qué no se pudo entender.</div></div>
+
+ <button class="go" id="go">⚡ Generar demo</button>
+ <div class="prog" id="prog"><span id="ptxt">Subiendo fotos…</span><div class="bar"><i id="pbar"></i></div></div>
+</form>
+
+<aside class="side"><div class="card"><h2>Demos generadas</h2><div id="list"><div class="hint">Aún no hay demos.</div></div></div></aside>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+let photos = [], menu = [], tpl = 'auto', aiOn = false, imgAiOn = false, mk = 0;
+const CATS = ['auto','comida','bebida','fachada','interior','ambiente','personal','clientes'];
+
+fetch('/api/demos').then(r => r.json()).then(({ demos, aiEnabled, imageAiEnabled }) => {
+  aiOn = aiEnabled;
+  $('#aiBadge').textContent = (aiEnabled ? '● Claude activo' : 'Claude no configurado') + ' · ' + (imageAiEnabled ? 'Fotos IA activas' : 'Fotos IA no configuradas');
+  $('#aiBadge').classList.toggle('on', aiEnabled && imageAiEnabled);
+  imgAiOn = imageAiEnabled;
+  // funciones de pago: solo se muestran si hay claves configuradas en .env
+  $('#aiBadge').hidden = !(aiEnabled || imageAiEnabled);
+  $('#aiOpt').hidden = !imageAiEnabled;
+  if (!imageAiEnabled) $('#aiPhotos').checked = false;
+  renderPhotos();
+  if (demos.length) $('#list').innerHTML = demos.map(d => `<a class="demo" href="/p/${d.slug}"><img src="${d.hero}" alt=""><div><b>${d.name.replace(/</g,'&lt;')}</b><small>${d.template} · ${new Date(d.createdAt).toLocaleDateString('es-CR')}</small></div><button class="del" data-del="${d.slug}" title="Eliminar demo">🗑</button></a>`).join('');
+});
+
+// eliminar demo desde la lista
+$('#list').onclick = async e => {
+  const b = e.target.closest('[data-del]'); if (!b) return;
+  e.preventDefault();
+  if (!confirm('¿Eliminar esta demo? No se puede deshacer.')) return;
+  const r = await fetch('/api/demos/' + b.dataset.del, { method: 'DELETE' });
+  if (r.ok) b.closest('.demo').remove(); else alert('No se pudo eliminar');
+};
+
+// colores
+const sync = (a, b) => { a.oninput = () => b.value = a.value; b.oninput = () => { if (/^#[\da-f]{6}$/i.test(b.value)) a.value = b.value; }; };
+sync($('#c1'), $('#c1t'));
+// colores del logo -> paleta de la página (el servidor la recalcula al generar)
+const sync2 = () => { $('#c2').oninput = () => { $('#useC2').checked = true; }; };
+sync2();
+$('#logo').onchange = async e => {
+  const f = e.target.files[0];
+  $('#logoColorsRow').style.display = f ? 'flex' : 'none';
+  if (!f) return;
+  const fd = new FormData(); fd.append('logo', f);
+  const { colors } = await fetch('/api/palette', { method: 'POST', body: fd }).then(r => r.json());
+  if (!colors.length) { $('#logoHint').textContent = 'El logo no tiene colores marcados: elige el color a mano.'; return; }
+  logoColors = colors;
+  $('#logoSw').innerHTML = colors.map(c => `<i style="background:${c}"></i>`).join('');
+  applyLogoColors();
+};
+let logoColors = [];
+$('#useLogo').onchange = applyLogoColors;
+// si se elige un color a mano, manda la elección manual
+['#c1', '#c1t', '#c2'].forEach(s => $(s).addEventListener('input', () => { $('#useLogo').checked = false; $('#logoHint').textContent = ''; }));
+function applyLogoColors() {
+  if (!$('#useLogo').checked || !logoColors.length) { $('#logoHint').textContent = ''; return; }
+  $('#c1').value = $('#c1t').value = logoColors[0];
+  if (logoColors[1]) { $('#c2').value = logoColors[1]; $('#useC2').checked = true; }
+  $('#logoHint').textContent = 'Colores tomados del logo ✓';
+}
+
+// fotos
+const drop = $('#drop');
+drop.onclick = () => $('#pin').click();
+$('#pin').onchange = e => addPhotos(e.target.files);
+drop.ondragover = e => { e.preventDefault(); drop.classList.add('over'); };
+drop.ondragleave = () => drop.classList.remove('over');
+drop.ondrop = e => { e.preventDefault(); drop.classList.remove('over'); addPhotos(e.dataTransfer.files); };
+function guessCat(name) {
+  const n = name.toLowerCase();
+  for (const [re, c] of [[/fachad|front|exterior/, 'fachada'], [/interior|salon|salón/, 'interior'], [/ambient|terraza|noche/, 'ambiente'], [/staff|personal|chef|equipo|cocinero/, 'personal'], [/client/, 'clientes'], [/bebid|drink|jugo|cafe|café|batido|coctel|cerveza/, 'bebida'], [/plat|comida|food|dish|casado|burger|pizza/, 'comida']]) if (re.test(n)) return c;
+  return aiOn ? 'auto' : 'comida';
+}
+function addPhotos(fl) { for (const f of fl) if (f.type.startsWith('image/')) photos.push({ f, cat: guessCat(f.name), url: URL.createObjectURL(f) }); renderPhotos(); }
+function renderPhotos() {
+  $('#thumbs').innerHTML = photos.map((p, i) => `<div class="th"><img src="${p.url}" alt=""><button type="button" class="x" data-i="${i}">×</button><select data-i="${i}">${CATS.filter(c => aiOn || c !== 'auto').map(c => `<option ${c === p.cat ? 'selected' : ''} value="${c}">${c === 'auto' ? '✨ auto (IA)' : c}</option>`).join('')}</select></div>`).join('');
+  const n = photos.length, el = $('#pcount');
+  el.textContent = `${n} foto${n === 1 ? '' : 's'} · mínimo 5, ideal 10–15`; el.className = 'count ' + (n < 5 ? 'low' : n >= 10 ? 'good' : '');
+}
+$('#thumbs').onclick = e => { if (e.target.matches('.x')) { photos.splice(+e.target.dataset.i, 1); renderPhotos(); } };
+$('#thumbs').onchange = e => { if (e.target.matches('select')) photos[+e.target.dataset.i].cat = e.target.value; };
+
+// menú
+function addItem(it = {}) { menu.push({ key: 'k' + (mk++), cat: it.cat || '', name: it.name || '', desc: it.desc || '', price: it.price || '', file: null }); renderMenu(); }
+function renderMenu() {
+  const cats = [...new Set(menu.map(m => m.cat).filter(Boolean))];
+  $('#menu').innerHTML = `<datalist id="cats">${cats.map(c => `<option value="${c}">`).join('')}</datalist>` + menu.map((m, i) => `<div class="mrow" data-i="${i}">
+   <label class="ph" style="${m.file ? `background-image:url(${URL.createObjectURL(m.file)})` : ''}">${m.file ? '' : '📷'}<input type="file" accept="image/*" hidden data-f="file"></label>
+   <input placeholder="Nombre" value="${esc(m.name)}" data-f="name"><input class="ct" placeholder="Categoría" list="cats" value="${esc(m.cat)}" data-f="cat">
+   <input class="pr" placeholder="Precio" value="${esc(m.price)}" data-f="price" inputmode="numeric"><span></span>
+   <button type="button" data-del>×</button>
+   <input class="desc" placeholder="Descripción" value="${esc(m.desc)}" data-f="desc"></div>`).join('');
+}
+const esc = s => String(s).replace(/"/g, '&quot;').replace(/</g, '&lt;');
+$('#menu').oninput = e => { const r = e.target.closest('.mrow'); const f = e.target.dataset.f; if (r && f && f !== 'file') menu[+r.dataset.i][f] = e.target.value; };
+$('#menu').onchange = e => { const r = e.target.closest('.mrow'); if (e.target.dataset.f === 'file') { menu[+r.dataset.i].file = e.target.files[0]; renderMenu(); } else if (e.target.dataset.f === 'cat') renderMenu(); };
+$('#menu').onclick = e => { if (e.target.matches('[data-del]')) { menu.splice(+e.target.closest('.mrow').dataset.i, 1); renderMenu(); } };
+$('#addm').onclick = () => addItem({ cat: menu.at(-1)?.cat });
+$('#paste').onclick = () => { const b = $('#pasteBox'); b.style.display = b.style.display === 'none' ? 'block' : 'none'; };
+$('#pasteGo').onclick = () => {
+  let cat = '';
+  for (const line of $('#pasteTxt').value.split('\n').map(l => l.trim()).filter(Boolean)) {
+    const p = line.split('|').map(s => s.trim());
+    if (p.length >= 3) addItem({ cat: p[0], name: p[1], desc: p.length > 3 ? p[2] : '', price: p.at(-1) });
+    else if (p.length === 2) addItem({ cat, name: p[0], price: p[1] });
+    else { const m = /^(.*?)[\s.\-–:]+₡?\s*([\d.,]+)\s*$/.exec(line); if (m) addItem({ cat, name: m[1], price: m[2] }); else cat = line.replace(/:$/, ''); }
+  }
+  $('#pasteTxt').value = ''; $('#pasteBox').style.display = 'none';
+};
+
+// instrucciones: ejemplos rápidos
+$('#chips').onclick = e => { if (e.target.tagName !== 'BUTTON') return; const t = $('#instr'); t.value = (t.value.trim() ? t.value.trim() + '\n' : '') + e.target.textContent; t.focus(); };
+
+// plantilla
+$('#tpls').onclick = e => { const t = e.target.closest('.tpl'); if (!t) return; tpl = t.dataset.t; document.querySelectorAll('.tpl').forEach(x => x.classList.toggle('on', x === t)); };
+
+// ejemplo
+$('#sample').onclick = () => {
+  const f = $('#f'), v = { name: 'Soda Doña Rosa', description: 'Soda familiar en el corazón de Heredia. Desde 2004 servimos casados abundantes, gallo pinto recién hecho y el mejor café chorreado del barrio.', phone: '2260-1234', whatsapp: '8888-1234', email: 'hola@sodadonarosa.cr', address: 'Calle 4, Avenida 2, Heredia Centro, Heredia, Costa Rica', facebook: 'sodadonarosa', instagram: '@sodadonarosa', tiktok: '@sodadonarosa' };
+  for (const k in v) f.elements[k].value = v[k];
+  if (!menu.length) [['Desayunos','Gallo pinto tradicional','Con huevo, natilla, plátano maduro y tortilla','2800'],['Casados','Casado con pollo','Arroz, frijoles, ensalada, maduro y picadillo del día','3800'],['Casados','Casado con bistec','Bistec encebollado con la guarnición de la casa','4200'],['Bebidas','Café chorreado','Café de altura chorreado en bolsita','900'],['Bebidas','Fresco de cas','Natural, hecho al momento','1200']].forEach(([cat,name,desc,price]) => addItem({ cat, name, desc, price }));
+};
+
+// enviar
+$('#f').onsubmit = async e => {
+  e.preventDefault();
+  if (photos.length < 5 && !confirm(`Solo hay ${photos.length} fotos (mínimo recomendado: 5). ¿Generar de todos modos?`)) return;
+  const fd = new FormData(e.target);
+  fd.delete('logo'); if ($('#logo').files[0]) fd.append('logo', $('#logo').files[0]);
+  if (!$('#useC2').checked) fd.set('color2', '');
+  fd.append('template', tpl);
+  ['fReserve', 'fSearch'].forEach(k => fd.set(k, $('#' + k).checked ? '1' : '0'));
+  photos.forEach(p => fd.append('photos', p.f));
+  fd.append('photoCats', JSON.stringify(photos.map(p => p.cat)));
+  fd.append('menu', JSON.stringify(menu.map(({ file, ...m }) => m)));
+  menu.forEach(m => m.file && fd.append('menuPhoto_' + m.key, m.file));
+  $('#go').disabled = true; $('#prog').classList.add('on');
+  const steps = ['Subiendo fotos…', 'Analizando nitidez, luz y encuadre…', aiOn ? 'La IA está eligiendo los mejores platillos…' : 'Eligiendo los mejores platillos…', 'Retocando fotos gastronómicas…', ...($('#aiPhotos').checked ? ['La IA está rehaciendo las fotos de comida (≈1 min)…'] : []), 'Escribiendo textos y armando la web…'];
+  let s = 0; const tick = setInterval(() => { s = Math.min(s + 1, steps.length - 1); $('#ptxt').textContent = steps[s]; $('#pbar').style.width = (20 + s * 18) + '%'; }, $('#aiPhotos').checked ? 4000 : 1800);
+  $('#pbar').style.width = '12%';
+  const xhr = new XMLHttpRequest(); xhr.open('POST', '/api/demos');
+  xhr.upload.onprogress = ev => { if (s === 0) $('#pbar').style.width = (ev.loaded / ev.total * 20) + '%'; };
+  xhr.onload = () => {
+    clearInterval(tick);
+    const r = JSON.parse(xhr.responseText || '{}');
+    if (xhr.status !== 200) { alert(r.error || 'Error'); $('#go').disabled = false; $('#prog').classList.remove('on'); return; }
+    $('#pbar').style.width = '100%'; $('#ptxt').textContent = `¡Listo en ${(r.ms / 1000).toFixed(1)} s!`;
+    location.href = '/p/' + r.slug;
+  };
+  xhr.onerror = () => { clearInterval(tick); alert('Error de red'); $('#go').disabled = false; };
+  xhr.send(fd);
+};
+</script></body></html>

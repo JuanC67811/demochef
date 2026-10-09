@@ -1,0 +1,11 @@
+# dependencias
+node_modules/
+# demos generadas (fotos y datos de clientes reales)
+data/
+# claves y configuración local
+.env
+.claude/
+# sistema
+.DS_Store
+Thumbs.db
+*.log

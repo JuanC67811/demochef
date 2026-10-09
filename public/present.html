@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Presentación de la demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f14;--pan:#151821;--pan2:#1c2030;--line:#262b3b;--txt:#e8eaf0;--mut:#8b91a5;--acc:#ff5a36}
+*{box-sizing:border-box;margin:0}html,body{height:100%}body{background:var(--bg);color:var(--txt);font:14px/1.5 Inter,system-ui,sans-serif;display:flex;flex-direction:column}
+.bar{display:flex;gap:10px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.bar a.back{color:var(--mut);text-decoration:none;font-weight:600}.bar h1{font-size:.95rem;font-weight:800;margin-right:auto}
+.seg{display:flex;background:var(--pan2);border-radius:10px;padding:3px}.seg button{background:none;border:0;color:var(--mut);padding:7px 12px;border-radius:8px;font:600 .82rem Inter;cursor:pointer}.btn.on{background:var(--acc);border-color:var(--acc);color:#fff}.seg button.on{background:var(--acc);color:#fff}
+.btn{background:var(--pan2);border:1px solid var(--line);color:var(--txt);padding:8px 12px;border-radius:10px;cursor:pointer;font:600 .82rem Inter;text-decoration:none}.btn:hover{border-color:var(--acc)}
+.main{flex:1;display:flex;min-height:0;height:0}
+.stage{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 50% 30%,#1b2030,#0d0f14);overflow:auto}
+.frame{width:100%;height:100%;flex:none;border:0;border-radius:12px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.5);transition:width .45s,height .45s,border-radius .45s}
+.mob .frame{width:414px;height:min(868px,100%);border-radius:44px;border:12px solid #000;outline:2px solid #333}
+.panel{width:360px;border-left:1px solid var(--line);overflow:auto;padding:16px;display:none}.panel.on{display:block}
+.panel h3{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);margin:18px 0 8px}
+label{font-size:.78rem;color:var(--mut);display:block;margin:8px 0 4px}
+input,textarea{width:100%;background:var(--pan2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:8px 10px;font:inherit}textarea{min-height:90px}
+.ph{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.ph div{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent}.ph div.sp{border-color:#22c55e}.ph div.hero{border-color:var(--acc)}
+.ph img{width:100%;aspect-ratio:1;object-fit:cover;display:block}.ph span{position:absolute;left:4px;bottom:4px;background:rgba(0,0,0,.75);font-size:.68rem;padding:1px 6px;border-radius:6px}
+.fts label{display:flex;gap:8px;align-items:center;margin:6px 0;color:var(--txt);font-size:.85rem}.fts input{width:auto}
+.ires{font-size:.8rem;margin-top:8px}.ires li{margin:2px 0 2px 16px}.ires .ok{color:#22c55e}.ires .no{color:#f59e0b}.ires small{color:var(--mut)}
+.legend{font-size:.75rem;color:var(--mut)}.legend b{color:#22c55e}.legend i{color:var(--acc);font-style:normal;font-weight:700}
+@media(max-width:900px){.panel{position:fixed;inset:auto 0 0 0;width:auto;height:60vh;background:var(--pan);border-top:1px solid var(--line);z-index:5}}
+
+/* ── Tema DemoChef: amarillo chillón + grafito ── */
+:root{--bg:#18191c;--pan:#212327;--pan2:#2b2e33;--line:#383c43;--txt:#f5f5f2;--mut:#a0a4ab;--acc:#ffd60a;--acc-d:#c9a800;--ink:#111214;--ok:#22c55e}
+.bar{background:var(--acc);color:var(--ink);border:0;box-shadow:0 4px 0 var(--ink);position:relative;z-index:2}
+.bar a.back .mark{background:var(--ink);color:var(--acc);width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:1.1rem;transform:rotate(-6deg);transition:transform .2s}.bar a.back:hover .mark{transform:rotate(0) scale(1.06)}
+.bar h1{font:900 1.1rem Archivo,sans-serif;letter-spacing:-.02em}
+.bar .seg{background:#11121418}.bar .seg button{color:#111214b3}.bar .seg button.on{background:var(--ink);color:var(--acc)}
+.bar .btn{background:var(--ink);border-color:var(--ink);color:var(--txt)}.bar .btn:hover{color:var(--acc)}.bar .btn.on{background:var(--ink);color:var(--acc)}
+.stage{background:radial-gradient(circle at 50% 25%,#2b2e33,#18191c 70%)}
+.panel{background:var(--pan)}.panel h3{color:var(--acc);font-family:Archivo,sans-serif;font-weight:800}
+.panel .btn:hover{border-color:var(--acc);color:var(--acc)}
+#save{background:var(--acc)!important;color:var(--ink)!important;font-weight:800}
+input[type=checkbox]{accent-color:var(--acc)}
+.ph div.hero{border-color:var(--acc)}
+</style></head><body>
+<div class="bar"><a class="back" href="/" title="Nueva demo"><span class="mark">🍽</span></a><h1 id="name">…</h1>
+ <div class="seg" id="tpl"><button data-t="rustic">Rustic CR</button><button data-t="premium">Premium</button><button data-t="urban">Urban</button></div>
+ <div class="seg" id="dev"><button data-d="desk" class="on">🖥 Escritorio</button><button data-d="mob">📱 Móvil</button></div>
+ <button class="btn" id="aiT" hidden>✨ Fotos IA</button><button class="btn" id="edit">✎ Ajustar</button><button class="btn" id="copy">🔗 Copiar enlace</button><a class="btn" id="zip">⬇ Descargar sitio</a><a class="btn" id="open" target="_blank">⤢ Pantalla completa</a>
+</div>
+<div class="main"><div class="stage" id="stage"><iframe class="frame" id="fr" title="Demo"></iframe></div>
+<aside class="panel" id="panel">
+ <h3>Funciones</h3><div class="fts"><label><input type="checkbox" data-f="reserve"> 📅 Reservaciones</label><label><input type="checkbox" data-f="search"> 🔍 Buscador del menú</label></div>
+ <h3>Instrucciones especiales</h3><textarea id="instr" rows="5" placeholder="Una por línea. Ej: Horario: L-S 7am a 8pm · Aviso: ¡Express! · Ocultar la galería · Más elegante · Sin adornos ticos"></textarea>
+ <button class="btn" id="applyI" style="width:100%;margin-top:8px">Aplicar instrucciones</button><div id="ires" class="ires"></div>
+ <h3>Textos</h3><label>Eslogan</label><input id="slogan"><label>Sobre nosotros</label><textarea id="about" rows="7"></textarea>
+ <h3>Especialidades</h3><div id="specs"></div>
+ <h3>Análisis de fotos</h3><div class="legend">Puntaje de calidad · <b>verde</b> = especialidad · <i>naranja</i> = imagen principal. Clic en una foto = usarla como principal.</div><div class="ph" id="ph" style="margin-top:8px"></div>
+ <button class="btn" id="save" style="width:100%;margin-top:16px;background:var(--acc);border:0;color:#fff">Guardar cambios</button>
+</aside></div>
+<script>
+const $ = s => document.querySelector(s), slug = location.pathname.split('/').pop();
+let d, t;
+const url = () => `/demo/${slug}?t=${t}`;
+function load() { $('#fr').src = url(); $('#open').href = url(); $('#zip').href = `/api/demos/${slug}/export?t=${t}`; document.querySelectorAll('#tpl button').forEach(b => b.classList.toggle('on', b.dataset.t === t)); }
+fetch('/api/demos/' + slug).then(r => { if (!r.ok) throw 0; return r.json(); }).then(x => { d = x; t = d.template; $('#name').textContent = d.biz.name; document.title = d.biz.name + ' · demo'; load(); fill(); aiBtn(); if (d.instructionsResult?.unknown?.length) $('#panel').classList.add('on'); }).catch(() => { $('#name').textContent = 'Demo no encontrada'; $('#stage').innerHTML = '<div style="text-align:center"><p style="font:900 1.6rem Archivo,sans-serif;margin-bottom:8px">Esta demo ya no existe</p><p style="color:var(--mut);margin-bottom:18px">Puede que la hayas eliminado o regenerado.</p><a class="btn" href="/" style="background:var(--acc);color:var(--ink);border:0">← Volver a mis demos</a></div>'; });
+const aiBtn = () => { const has = d.photos.some(p => p.ai); $('#aiT').hidden = !has; $('#aiT').classList.toggle('on', !!d.aiPhotos); $('#aiT').textContent = d.aiPhotos ? '✨ Fotos IA' : '📷 Originales'; };
+$('#aiT').onclick = async () => { d.aiPhotos = !d.aiPhotos; aiBtn(); fill(); await fetch('/api/demos/' + slug, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ aiPhotos: d.aiPhotos }) }); load(); };
+const src = (p, sm) => `/d/${slug}/img/${p.id}${d.aiPhotos && p.ai ? '-ai' : ''}${sm ? '-s' : ''}.webp`;
+$('#tpl').onclick = e => { if (e.target.dataset.t) { t = e.target.dataset.t; load(); fetch('/api/demos/' + slug, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ template: t }) }); } };
+$('#dev').onclick = e => { const v = e.target.dataset.d; if (!v) return; $('#stage').classList.toggle('mob', v === 'mob'); document.querySelectorAll('#dev button').forEach(b => b.classList.toggle('on', b === e.target)); };
+$('#edit').onclick = () => $('#panel').classList.toggle('on');
+$('#copy').onclick = () => { navigator.clipboard.writeText(location.origin + '/demo/' + slug + '?t=' + t); $('#copy').textContent = '✓ Copiado'; setTimeout(() => $('#copy').textContent = '🔗 Copiar enlace', 1500); };
+const esc = s => String(s ?? '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+function showRes(r) {
+  if (!r) { $('#ires').innerHTML = ''; return; }
+  $('#ires').innerHTML = (r.understood.length ? `<div class="ok">Aplicado:</div><ul>${r.understood.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '') + (r.unknown.length ? `<div class="no">No lo entendí (pídemelo directamente a mí en el chat):</div><ul>${r.unknown.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '') + `<small>Motor: ${esc(r.engine)}</small>`;
+}
+function fill() {
+  document.querySelectorAll('.fts [data-f]').forEach(i => i.checked = (d.features || {})[i.dataset.f] !== false);
+  $('#instr').value = d.instructions || ''; showRes(d.instructionsResult);
+  $('#slogan').value = d.slogan; $('#about').value = d.about.join('\n\n');
+  $('#specs').innerHTML = d.specials.map((s, i) => `<div style="display:grid;grid-template-columns:48px 1fr 90px;gap:6px;margin-bottom:6px;align-items:center"><img src="${src(d.photos.find(p => p.id === s.id), 1)}" style="width:48px;height:48px;object-fit:cover;border-radius:8px"><input data-i="${i}" data-f="name" value="${esc(s.name)}"><input data-i="${i}" data-f="price" value="${esc(s.price)}" placeholder="Precio"></div>`).join('');
+  const sp = new Set(d.specials.map(s => s.id));
+  $('#ph').innerHTML = d.photos.slice().sort((a, z) => z.score - a.score).map(p => `<div data-id="${p.id}" class="${p.id === d.hero ? 'hero' : sp.has(p.id) ? 'sp' : ''}" title="${p.cat} · nitidez ${p.q.sharp} · luz ${p.q.light} · color ${p.q.color}${p.appeal != null ? ' · atractivo IA ' + p.appeal : ''}"><img src="${src(p, 1)}"><span>${p.score} · ${p.cat}${p.ai ? ' · ✨' : ''}</span></div>`).join('');
+}
+$('#specs').oninput = e => { const i = e.target.dataset.i; if (i != null) d.specials[i][e.target.dataset.f] = e.target.value; };
+$('#ph').onclick = e => { const el = e.target.closest('[data-id]'); if (el) { d.hero = el.dataset.id; fill(); } };
+$('.fts').onchange = async e => {
+  const f = e.target.dataset.f; if (!f) return;
+  d.features = { ...(d.features || {}), [f]: e.target.checked };
+  await fetch('/api/demos/' + slug, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ features: { [f]: e.target.checked } }) });
+  load();
+};
+$('#applyI').onclick = async () => {
+  $('#applyI').textContent = 'Aplicando…';
+  const r = await fetch('/api/demos/' + slug, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ instructions: $('#instr').value }) }).then(r => r.json());
+  $('#applyI').textContent = 'Aplicar instrucciones';
+  if (r.demo) { d = r.demo; t = d.template; fill(); load(); if (!d.instructionsResult?.unknown?.length) $('#applyI').textContent = '✓ Aplicado'; setTimeout(() => $('#applyI').textContent = 'Aplicar instrucciones', 1500); }
+};
+$('#save').onclick = async () => {
+  await fetch('/api/demos/' + slug, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slogan: $('#slogan').value, about: $('#about').value.split(/\n\s*\n/).map(s => s.trim()), specials: d.specials, hero: d.hero, template: t }) });
+  d.slogan = $('#slogan').value; load();
+};
+</script></body></html>
