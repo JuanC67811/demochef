@@ -1,6 +1,30 @@
-# DemoChef — Generador de demos web para restaurantes
+# 🍽 DemoChef — Generador de demos web para restaurantes
 
-Herramienta interna para crear, en minutos, una demostración comercial de la página web de un restaurante.
+Herramienta para crear, en minutos, una demostración comercial de la página web de un restaurante a partir de sus fotos, su menú y su logo. Tres plantillas con estilos completamente distintos, toque costarricense y diseño *mobile first*. **Todo funciona gratis y en local.**
+
+### 👉 [Ver la demo en vivo](https://juanc67811.github.io/demochef/)
+
+<p align="center"><img src="docs/screenshots/movil.jpg" alt="Las tres plantillas en celular" width="900"></p>
+
+| Rustic CR | Premium Dining | Urban Food |
+|---|---|---|
+| [![Rustic CR](docs/screenshots/rustic.jpg)](https://juanc67811.github.io/demochef/rustic/) | [![Premium Dining](docs/screenshots/premium.jpg)](https://juanc67811.github.io/demochef/premium/) | [![Urban Food](docs/screenshots/urban.jpg)](https://juanc67811.github.io/demochef/urban/) |
+| Sodas, comida típica, casados | Parrillas, marisquerías, gourmet | Hamburguesas, pizzerías, food trucks |
+
+**El panel de trabajo:** formulario de datos y pantalla de presentación, con cambio de plantilla en vivo y vista de celular.
+
+<p align="center"><img src="docs/screenshots/formulario.jpg" alt="Formulario de DemoChef" width="49%"> <img src="docs/screenshots/presentacion.jpg" alt="Pantalla de presentación" width="49%"></p>
+
+## Qué hace
+- **Análisis de fotos:** puntúa nitidez, luz, contraste, color y encuadre, y elige automáticamente las 3 especialidades de la casa.
+- **Retoque gastronómico local** con `sharp`: tonos cálidos, viveza, contraste, nitidez y viñeta.
+- **Paleta desde el logo:** la página toma los colores del negocio.
+- **Toque tico** dibujado en SVG: rueda de carreta de Sarchí, hoja de plátano, chorreador y mantel típico.
+- **Textos automáticos** (eslogan y "Sobre nosotros") e **instrucciones especiales** en español ("Horario: …", "Ocultar la galería", "Más elegante"…).
+- **Reservaciones por WhatsApp** y **buscador del menú**.
+- **Exportación a ZIP** lista para publicar gratis.
+
+Stack: Node.js, Express, sharp. Sin frameworks de frontend ni dependencias de pago.
 
 ## Uso
 ```
@@ -47,3 +71,20 @@ Lo que no entienda se muestra aparte. Si [Ollama](https://ollama.com) (IA local 
 - `lib/images.js`: análisis de calidad y retoque · `lib/ai.js`: Claude visión · `lib/instructions.js`: instrucciones especiales · `lib/imagegen.js`: fotos con IA (Gemini) · `lib/copy.js`: textos de respaldo
 - `templates/`: `rustic.js`, `premium.js`, `urban.js` + `common.js`
 - `data/<slug>/`: cada demo (demo.json + imágenes optimizadas en webp)
+- `docs/`: demo en vivo publicada con GitHub Pages ("Soda La Fogata", restaurante ficticio)
+
+## Créditos de fotografías
+Las fotos de la demo en vivo provienen de Wikimedia Commons bajo licencias libres y fueron retocadas por DemoChef. Las versiones retocadas de fotos CC BY-SA se comparten bajo la misma licencia. "Soda La Fogata" es un negocio ficticio; el logo es original de este proyecto.
+
+| Platillo en la demo | Archivo original | Autor | Licencia |
+|---|---|---|---|
+| Casado con bistec | [Casado Tico.jpg](https://commons.wikimedia.org/wiki/File:Casado_Tico.jpg) | Richie Diesterheft from Chicago, IL, USA | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) |
+| Plato típico con queso frito | [Casado con Carne de Ternero, Sacramento, Heredia, Costa Rica.JPG](https://commons.wikimedia.org/wiki/File:Casado_con_Carne_de_Ternero,_Sacramento,_Heredia,_Costa_Rica.JPG) | Victor Quirós A | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) |
+| Casado con pollo empanizado | [Casado meal at Cristal soda restaurant.jpg](https://commons.wikimedia.org/wiki/File:Casado_meal_at_Cristal_soda_restaurant.jpg) | Spideog | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
+| Gallo pinto con natilla | [Costa Rican Gallo Pinto.jpg](https://commons.wikimedia.org/wiki/File:Costa_Rican_Gallo_Pinto.jpg) | Legendre17 | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) |
+| Chifrijo | [Chifrijo.jpg](https://commons.wikimedia.org/wiki/File:Chifrijo.jpg) | Roberto Rodríguez | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) |
+| Olla de carne | [Olla de carne.jpg](https://commons.wikimedia.org/wiki/File:Olla_de_carne.jpg) | Rodtico21 | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) |
+| Patacones | [Patacones.JPG](https://commons.wikimedia.org/wiki/File:Patacones.JPG) | Jdvillalobos | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) |
+| Ceviche de pescado | [Ceviche.jpg](https://commons.wikimedia.org/wiki/File:Ceviche.jpg) | Micah MacAllen | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) |
+| Tres leches | [Torta de tres leches 2.jpg](https://commons.wikimedia.org/wiki/File:Torta_de_tres_leches_2.jpg) | Muago | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) |
+| Café chorreado | [Chorreador.jpg](https://commons.wikimedia.org/wiki/File:Chorreador.jpg) | Sharalds | Public domain |

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DemoChef · Demo en vivo</title>
+<meta name="description" content="DemoChef genera demos web para restaurantes en minutos: tres plantillas con toque costarricense.">
+<meta property="og:image" content="screenshots/movil.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#18191c;--pan:#212327;--pan2:#2b2e33;--line:#383c43;--txt:#f5f5f2;--mut:#a0a4ab;--acc:#ffd60a;--ink:#111214}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(#ffffff0b 1px,transparent 1px) 0 0/22px 22px,var(--bg);color:var(--txt);font:16px/1.6 Inter,system-ui,sans-serif}
+a{color:inherit}
+.top{background:var(--acc);color:var(--ink);box-shadow:0 4px 0 var(--ink)}
+.top .in{max-width:1180px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;font:900 1.25rem Archivo,sans-serif;text-decoration:none}
+.mark{background:var(--ink);color:var(--acc);width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:1.25rem;transform:rotate(-6deg)}
+.gh{background:var(--ink);color:var(--txt);text-decoration:none;font-weight:700;font-size:.9rem;padding:9px 14px;border-radius:10px}
+.gh:hover{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.hero{padding:clamp(48px,8vw,90px) 0 40px;display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center}
+.hero h1{font:900 clamp(2.4rem,6vw,4.2rem)/1 Archivo,sans-serif;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p{color:var(--mut);font-size:1.1rem;margin:18px 0 26px;max-width:46ch}
+.hero img{width:100%;border-radius:18px;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills span{background:var(--pan2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:600}
+@media(max-width:860px){.hero{grid-template-columns:1fr}}
+h2{font:900 clamp(1.6rem,3.5vw,2.2rem) Archivo,sans-serif;letter-spacing:-.02em;margin-bottom:6px}
+h2:after{content:'';display:block;width:56px;height:6px;background:var(--acc);border-radius:3px;margin-top:10px}
+.sub{color:var(--mut);margin:14px 0 26px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding-bottom:70px}
+.card{background:var(--pan);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;transition:transform .2s,border-color .2s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-4px);border-color:var(--acc)}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block;border-bottom:1px solid var(--line)}
+.card .bd{padding:18px 20px 22px}
+.card b{display:block;font:800 1.25rem Archivo,sans-serif}
+.card small{color:var(--mut)}
+.card .go{display:inline-block;margin-top:14px;background:var(--acc);color:var(--ink);font-weight:800;padding:8px 14px;border-radius:10px;font-size:.9rem}
+@media(max-width:860px){.cards{grid-template-columns:1fr}}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding-bottom:70px}
+.how div{background:var(--pan);border:1px solid var(--line);border-radius:18px;padding:22px}
+.how .n{display:inline-block;background:var(--acc);color:var(--ink);font:900 .85rem Archivo,sans-serif;border-radius:7px;padding:3px 8px;margin-bottom:10px}
+.how b{display:block;font:800 1.1rem Archivo,sans-serif;margin-bottom:4px}
+.how p{color:var(--mut);font-size:.95rem}
+@media(max-width:860px){.how{grid-template-columns:1fr}}
+.shot{width:100%;border-radius:18px;border:1px solid var(--line);margin-bottom:70px}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--mut);font-size:.88rem}
+footer a{color:var(--acc)}
+</style></head><body>
+<header class="top"><div class="in"><a class="brand" href="./"><span class="mark">🍽</span>DemoChef</a><a class="gh" href="https://github.com/JuanC67811/demochef">Ver código en GitHub →</a></div></header>
+
+<main class="wrap">
+ <section class="hero">
+  <div>
+   <h1>La web de tu restaurante, <em>lista en minutos.</em></h1>
+   <p>DemoChef genera demos web completas para restaurantes a partir de sus fotos, su menú y su logo: tres estilos distintos, toque costarricense y diseño pensado primero para el celular.</p>
+   <div class="pills"><span>3 plantillas</span><span>Colores desde el logo</span><span>Retoque de fotos</span><span>Mobile first</span><span>100% gratis</span></div>
+  </div>
+  <img src="screenshots/movil.jpg" alt="Las tres plantillas de DemoChef en celular">
+ </section>
+
+ <h2>Demo en vivo</h2>
+ <p class="sub">"Soda La Fogata" es un restaurante ficticio, generado con DemoChef. La misma información, tres estilos:</p>
+ <div class="cards">
+  <a class="card" href="rustic/"><img src="screenshots/rustic.jpg" alt="Plantilla Rustic CR" loading="lazy"><div class="bd"><b>Rustic CR</b><small>Sodas, comida típica, casados. Madera, mantel y carreta de Sarchí.</small><br><span class="go">Abrir demo →</span></div></a>
+  <a class="card" href="premium/"><img src="screenshots/premium.jpg" alt="Plantilla Premium Dining" loading="lazy"><div class="bd"><b>Premium Dining</b><small>Parrillas, marisquerías, gourmet. Negro, dorado y fotografía grande.</small><br><span class="go">Abrir demo →</span></div></a>
+  <a class="card" href="urban/"><img src="screenshots/urban.jpg" alt="Plantilla Urban Food" loading="lazy"><div class="bd"><b>Urban Food</b><small>Hamburguesas, pizzerías, food trucks. Tipografía gigante y energía.</small><br><span class="go">Abrir demo →</span></div></a>
+ </div>
+
+ <h2>Cómo funciona</h2>
+ <p class="sub">Una herramienta interna para preparar propuestas comerciales en una sola visita.</p>
+ <div class="how">
+  <div><span class="n">01</span><b>Datos y fotos</b><p>Nombre, logo, contacto, ubicación, menú y de 5 a 15 fotos del restaurante.</p></div>
+  <div><span class="n">02</span><b>Generación</b><p>Puntúa cada foto (nitidez, luz, color, encuadre), elige las 3 especialidades, retoca la comida y arma la web.</p></div>
+  <div><span class="n">03</span><b>Presentación</b><p>Cambia de plantilla en vivo, muestra la vista de celular y descarga el sitio listo para publicar.</p></div>
+ </div>
+ <img class="shot" src="screenshots/presentacion.jpg" alt="Pantalla de presentación de DemoChef" loading="lazy">
+</main>
+
+<footer><div class="wrap">Fotografías de comida de Wikimedia Commons bajo licencias libres (CC BY, CC BY-SA, CC0 y dominio público), retocadas por DemoChef. Autores y licencias en el <a href="https://github.com/JuanC67811/demochef#créditos-de-fotografías">README</a>. "Soda La Fogata" es un negocio ficticio.</div></footer>
+</body></html>
