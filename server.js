@@ -124,6 +124,8 @@ app.post('/api/demos', upload.any(), async (req, res) => {
     }
 
     const galleryPs = photos.filter(p => p.src === 'gallery' && p.id !== heroP.id).sort((a, z) => z.score - a.score);
+    // si hay pocas fotos sueltas, la galería se completa con las del menú (fuera de las especialidades)
+    if (galleryPs.length < 6) galleryPs.push(...photos.filter(p => p.src === 'menu' && p.id !== heroP.id && !specialsP.includes(p)).sort((a, z) => z.score - a.score).slice(0, 9 - galleryPs.length));
     const aboutPics = [
       ...photos.filter(p => ['personal', 'interior', 'fachada', 'ambiente', 'clientes'].includes(p.cat) && p.id !== heroP.id),
       ...galleryPs,
